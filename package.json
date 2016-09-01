@@ -1,7 +1,7 @@
 {
   "name": "lazy-template",
   "description": "Create template strings that are lazy and reusable.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/jamen/lazy-template",
   "author": "Jamen Marz (https://github.com/jamen)",
   "repository": "jamen/lazy-template",
