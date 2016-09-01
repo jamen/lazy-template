@@ -7,6 +7,7 @@ const lazy = require('lazy-template');
 
 // Create a lazy template string.
 const greet = lazy`Hello ${'subject'}.`;
+// Use the returned function to compile.
 
 greet({ subject: 'world' });
 // => 'Hello world.'
