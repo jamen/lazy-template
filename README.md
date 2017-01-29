@@ -3,20 +3,20 @@
 > Create template strings that are lazy and reusable.
 
 ```js
-const lazy = require('lazy-template');
+const lazy = require('lazy-template')
 
 // Create a lazy template string.
-const greet = lazy`Hello ${'subject'}.`;
+const greet = lazy`Hello ${0}. How is ${1}?`
 // Use the returned function to compile.
 
-greet({ subject: 'world' });
-// => 'Hello world.'
+greet([ 'Earth', 'the weather' ])
+// => 'Hello Earth. How is the weather?'
 
-greet({ subject: 'lazy-template user.' });
-// => 'Hello lazy-template user.'
+greet([ 'Mars', 'Jamen' ])
+// => 'Hello Mars.  How is Jamen?'
 ```
 
-This module is built with [`pixie`](https://github.com/jamen/pixie), and lets you pass in a second parameter for options.
+This module is built with [`pixie`](https://github.com/jamen/pixie).  You can use array indexes or object keys for the points.  Or just provide a different `compile` function all together.
 
 ## Installation
 
@@ -24,30 +24,42 @@ This module is built with [`pixie`](https://github.com/jamen/pixie), and lets yo
 $ npm install --save lazy-template
 ```
 
-## API
+## Usage
 
 ### `lazy`
-Create the `compile` function by using the `lazy` tag on a template string:
+
+Create a lazy template string.  Returns a `compile` function, which when called returns the concatenated string.
+
 ```javascript
-const compile = lazy`Hello ${'world'}.`;
+// Using array indexes:
+const compile = lazy`Hello ${0}. How are ${1}?`
+
+// Using object keys:
+const compile = lazy`Hello ${'world'}.  How is ${'thing'}?`
 ```
 
-### `compile(data, [options])`
-Compile the lazy string against some data.
- - data (`Object`): Data to use in your template.
- - options (`Object`): Options that are passed to [`pixie.compile`](https://github.com/jamen/pixie/blob/master/docs/API.md#compile).
+### `compile(data, [compile])`
+
+Compile the "lazy string" using some data.  Returns resulting string.
+
+ - data (`Array`|`Object`): Data to use in your template.
+ - compile (`Function`): A custom function to replace [`pixie.compile`](https://github.com/jamen/pixie#pixie_compile)
 
 ```js
-const compile = lazy`Hello ${'world'}.`
-
-compile({ world: 'Earth' });
+const compile = lazy`Hello ${0}.`
+compile([ 'Earth' ])
 // => 'Hello Earth.'
 
+const compile = lazy`Hello ${'world'}.`
 compile({ world: 'Mars' });
 // => 'Hello Mars.'
-```
 
-Returns a string of the compiled contents.
+const compile = lazy`Hello ${0}.  How is ${1}?`
+compile([ 'Pluto', 'Jamen' ], function (template, data) {
+  // Compile `template` and `data`
+  // Return result
+})
+```
 
 ## License
 

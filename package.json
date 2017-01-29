@@ -27,7 +27,8 @@
     "engine"
   ],
   "dependencies": {
-    "pixie": "^0.2.1"
+    "fast-args": "^1.0.0",
+    "pixie": "^1.0.0"
   },
   "devDependencies": {
     "tap-spec": "^4.1.1",

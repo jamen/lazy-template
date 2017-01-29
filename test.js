@@ -8,6 +8,6 @@ function testEngine(expression, data) {
 test('lazy string outputs', function(t) {
   t.is((lazy`foo ${'bar'} baz`)({ bar: 'HELLO' }), 'foo HELLO baz', 'templates single values');
   t.is((lazy`foo ${'bar'} baz ${'qux'}`)({ bar: 'HELLO', qux: 'WORLD' }), 'foo HELLO baz WORLD', 'templates multiple values');
-  t.is((lazy`foo ${'bar'} baz`)({ bar: 'HELLO' }, { engines: [testEngine] }), 'foo hello baz', 'uses pixie options');
+  t.is((lazy`foo ${0} baz ${1}`)(['QUX', 'QIX']), 'foo QUX baz QIX', 'with arrays')
   t.end();
 });

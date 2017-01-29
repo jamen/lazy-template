@@ -1,4 +1,5 @@
-var pixie = require('pixie');
+var pixie = require('pixie')
+var fargs = require('fast-args')
 
 module.exports = lazy;
 
@@ -9,9 +10,9 @@ module.exports = lazy;
   */
 
 function lazy(partials) {
-  var expressions = Array.prototype.slice.call(arguments, 1);
-  var template = [partials, expressions];
-  return function(data, options) {
-    return pixie.compile(template, data, options);
+  var template = [partials, fargs(arguments, 1)]
+  return function(data, compile) {
+    if (!compile) compile = pixie.compile
+    return compile(template, data)
   }
-};
+}
